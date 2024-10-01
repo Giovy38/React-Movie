@@ -51,7 +51,15 @@ export default function FilmCard({ id, imgUrl, title, release_date }: FilmCardPr
             {/* Content that shows on hover */}
             <div className="absolute inset-0 bg-black bg-opacity-90 flex flex-col gap-4 p-3 opacity-0 hover:opacity-100 transition-opacity duration-300 ease-in-out z-20">
                 <div className="w-full overflow-hidden min-h-[250px] rounded-3xl">
-                    <img className="hover:scale-125 cursor-grab transition-transform duration-300 ease-in-out" src={imgUrl} alt="film-cover" />
+                    <img
+                    onClick={()=> filmDetails() } 
+                    onKeyUp={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          filmDetails();
+                        }
+                      }} 
+                     className="hover:scale-125 cursor-pointer transition-transform duration-300 ease-in-out" 
+                     src={imgUrl} alt="film-cover" />
                 </div>
                 <h4 className="text-white flex justify-between items-center pr-5 pl-5">
                     <div>
@@ -67,14 +75,16 @@ export default function FilmCard({ id, imgUrl, title, release_date }: FilmCardPr
                    
                 </h4>
                 <div   
-                className="bg-[#f5c5189a] text-white rounded-full p-1 min-h-[70px] flex justify-center items-center hover:bg-[#f5c518] hover:text-black hover:text-lg transition-colors duration-300 ease-in-out">
+                onClick={()=> filmDetails() } 
+                onKeyUp={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      filmDetails();
+                    }
+                  }} 
+                className="bg-[#f5c5189a] text-white rounded-full p-1 min-h-[70px] flex justify-center items-center hover:bg-[#f5c518] hover:text-black hover:text-lg hover:cursor-pointer transition-colors duration-300 ease-in-out"
+                
+            >
                     <h3 
-                    onClick={()=> filmDetails() } 
-                    onKeyUp={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          filmDetails();
-                        }
-                      }} 
                     className="uppercase font-mono font-extrabold text-md hover:cursor-pointer">{title}</h3>
                 </div>
                 
