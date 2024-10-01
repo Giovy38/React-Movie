@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { FaRegHeart,FaHeart  } from "react-icons/fa6";
 import { useLikedFilms } from "../context/LikedFilmContext";
+import { useNotification } from "../context/NotificationContext";
 
 
 type FilmCardProps = {
@@ -15,6 +16,7 @@ export default function FilmCard({ id, imgUrl, title, release_date }: FilmCardPr
 
     const [liked, setLiked] = useState(false);
     const { likedFilms, addFilm, removeFilm } = useLikedFilms();
+    const { showNotification } = useNotification();
 
     useEffect(()=>{
         const isLiked = likedFilms.some((film) => film.id === id);
@@ -24,15 +26,17 @@ export default function FilmCard({ id, imgUrl, title, release_date }: FilmCardPr
     const toggleLike = ()=>{
         if(!liked){
             addFilm({id, title, imgUrl, release_date});
+            showNotification(`${title} added to liked films!`, "success");
         } else {
             removeFilm(id);
+            showNotification(`${title} removed from liked films!`, "error");
         }
         setLiked(!liked);
     }
 
 
     return (
-        <div className="relative w-[300px] h-[400px] rounded-3xl overflow-hidden">
+        <div className="relative w-[300px] h-[400px] rounded-3xl overflow-hidden shadow-lg shadow-[#f5c518]">
             {/* Image that is always visible */}
             <div className="absolute inset-0 z-10 cursor-grab">
                 <img className="w-full h-full object-cover " src={imgUrl} alt="film-cover" />

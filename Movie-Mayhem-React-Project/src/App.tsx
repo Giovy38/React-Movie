@@ -1,5 +1,6 @@
 import './App.css'
 import { LikedFilmsProvider } from './assets/context/LikedFilmContext';
+import { NotificationProvider } from './assets/context/NotificationContext';
 import Navbar from './assets/components/Navbar'
 import SearchBar from './assets/components/SearchBar'
 import Particles from '../components/ui/particles'
@@ -24,12 +25,14 @@ function App() {
       <Particles className='w-full ' quantity={500}/> 
       {/* Films Section */}
       <LikedFilmsProvider>
+      <NotificationProvider>
       <FilmSearchResult />
       <UpcomingFilmsSection />
       <PoupularFilms />
       <NowPlayingFilms />
       <TopRatedFilms />
       <LikedFilmsList />
+      </NotificationProvider>
       </LikedFilmsProvider>
       
       {/* Footer Part */}
