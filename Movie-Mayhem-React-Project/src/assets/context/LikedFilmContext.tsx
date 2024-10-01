@@ -10,17 +10,17 @@ interface FilmData {
     release_date: string;
 }
 
-// Tipo per il contesto
+// Context Type
 interface LikedFilmsContextType {
     likedFilms: FilmData[];
     addFilm: (film: FilmData) => void;
     removeFilm: (id: number) => void;
 }
 
-// Creazione del contesto
+// Context creation
 const LikedFilmsContext = createContext<LikedFilmsContextType | undefined>(undefined);
 
-// Provider del contesto
+// Context Provider 
 export const LikedFilmsProvider = ({ children }: { children: ReactNode }) => {
     const [likedFilms, setLikedFilms] = useState<FilmData[]>([]);
 
@@ -39,7 +39,7 @@ export const LikedFilmsProvider = ({ children }: { children: ReactNode }) => {
     );
 };
 
-// Hook per usare il contesto
+// eslint-disable-next-line react-refresh/only-export-components
 export const useLikedFilms = () => {
     const context = useContext(LikedFilmsContext);
     if (!context) {

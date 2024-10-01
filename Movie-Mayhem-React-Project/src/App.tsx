@@ -1,5 +1,5 @@
 import './App.css'
-import { LikedFilmsProvider } from './assets/context/Context';
+import { LikedFilmsProvider } from './assets/context/LikedFilmContext';
 import Navbar from './assets/components/Navbar'
 import SearchBar from './assets/components/SearchBar'
 import Particles from '../components/ui/particles'

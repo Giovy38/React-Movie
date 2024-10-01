@@ -1,4 +1,4 @@
-import { useLikedFilms } from "../context/Context";
+import { useLikedFilms } from "../context/LikedFilmContext";
 import SectionTitle from "./SectionTitle";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';

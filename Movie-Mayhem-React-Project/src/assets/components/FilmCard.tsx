@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { FaRegHeart,FaHeart  } from "react-icons/fa6";
-import { useLikedFilms } from "../context/Context";
+import { useLikedFilms } from "../context/LikedFilmContext";
 
 
 type FilmCardProps = {
