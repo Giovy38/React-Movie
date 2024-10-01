@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { FaRegHeart,FaHeart  } from "react-icons/fa6";
 import { useLikedFilms } from "../context/LikedFilmContext";
 import { useNotification } from "../context/NotificationContext";
+import { useNavigate } from "react-router-dom";
 
 
 type FilmCardProps = {
@@ -17,6 +18,7 @@ export default function FilmCard({ id, imgUrl, title, release_date }: FilmCardPr
     const [liked, setLiked] = useState(false);
     const { likedFilms, addFilm, removeFilm } = useLikedFilms();
     const { showNotification } = useNotification();
+    const navigate = useNavigate();
 
     useEffect(()=>{
         const isLiked = likedFilms.some((film) => film.id === id);
@@ -32,6 +34,10 @@ export default function FilmCard({ id, imgUrl, title, release_date }: FilmCardPr
             showNotification(`${title} removed from liked films!`, "error");
         }
         setLiked(!liked);
+    }
+
+    const filmDetails = () => {
+        navigate(`/film/${id}`);
     }
 
 
@@ -62,7 +68,14 @@ export default function FilmCard({ id, imgUrl, title, release_date }: FilmCardPr
                 </h4>
                 <div   
                 className="bg-[#f5c5189a] text-white rounded-full p-1 min-h-[70px] flex justify-center items-center hover:bg-[#f5c518] hover:text-black hover:text-lg transition-colors duration-300 ease-in-out">
-                    <h3 className="uppercase font-mono font-extrabold text-md hover:cursor-pointer">{title}</h3>
+                    <h3 
+                    onClick={()=> filmDetails() } 
+                    onKeyUp={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          filmDetails();
+                        }
+                      }} 
+                    className="uppercase font-mono font-extrabold text-md hover:cursor-pointer">{title}</h3>
                 </div>
                 
             </div>
