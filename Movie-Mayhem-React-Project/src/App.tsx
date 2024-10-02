@@ -1,6 +1,6 @@
 import './App.css'
-import { LikedFilmsProvider } from './assets/context/LikedFilmContext';
-import { NotificationProvider } from './assets/context/NotificationContext';
+import { LikedFilmsProvider } from './assets/provider/LikedFilmContext';
+import { NotificationProvider } from './assets/provider/NotificationContext';
 import Navbar from './assets/components/Navbar'
 import SearchBar from './assets/components/SearchBar'
 import Particles from '../components/ui/particles'
@@ -13,6 +13,7 @@ import PopularFilms from './assets/components/PopularFilmSection'
 import LikedFilmsList from './assets/components/LikedFilm';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
 import FilmDetails from './assets/page/FilmDetails';
+import { SearchProvider } from './assets/provider/SearchedFilmTitleContext';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
     <div className='overflow-hidden w-[99vw]'>
       <LikedFilmsProvider>
         <NotificationProvider>
+          <SearchProvider>
           <Router>
             {/* Navbar Section */}
             <Navbar />
@@ -52,6 +54,7 @@ function App() {
             <Particles className='w-full' quantity={500} />
             <Footer />
           </Router>
+          </SearchProvider>
         </NotificationProvider>
       </LikedFilmsProvider>
     </div>

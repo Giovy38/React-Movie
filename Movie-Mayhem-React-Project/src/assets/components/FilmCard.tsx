@@ -1,8 +1,8 @@
 
 import { useEffect, useState } from "react";
 import { FaRegHeart,FaHeart  } from "react-icons/fa6";
-import { useLikedFilms } from "../context/LikedFilmContext";
-import { useNotification } from "../context/NotificationContext";
+import { useLikedFilms } from "../provider/LikedFilmContext";
+import { useNotification } from "../provider/NotificationContext";
 import { useNavigate } from "react-router-dom";
 
 

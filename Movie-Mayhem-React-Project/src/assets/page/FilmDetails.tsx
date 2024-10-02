@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import { TbRating18Plus } from "react-icons/tb";
 import { FaStar,FaStarHalfStroke } from "react-icons/fa6";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { useLikedFilms } from "../context/LikedFilmContext";
+import { useLikedFilms } from "../provider/LikedFilmContext";
 
 
 type searchType = {
