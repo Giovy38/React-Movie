@@ -2,6 +2,8 @@ import { useState, useRef } from "react";
 import { useSearch } from "../provider/SearchedFilmTitleContext";
 import { CgSearch } from "react-icons/cg";
 import { RxCross1 } from "react-icons/rx";
+import { TbRating18Plus } from "react-icons/tb";
+
 
 
 type FilmData = {
@@ -30,6 +32,7 @@ export default function SearchBar() {
     const [title, setTitle] = useState('');
     const {setResults} = useSearch();
     const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+    const [adult, setAdult] = useState(false);
 
    
     const search = async (searchTitle: string)=>{
@@ -46,9 +49,10 @@ export default function SearchBar() {
 
       
        try{
-        const res = await fetch(`https://api.themoviedb.org/3/search/movie?query=${searchTitle}&include_adult=false&language=en-US&page=1`, options)
+        const res = await fetch(`https://api.themoviedb.org/3/search/movie?query=${searchTitle}&include_adult=${adult}&language=en-US&page=1`, options)
         const data: FilmData = await res.json()
         setResults(data.results)
+        console.log(res)
        } catch(error){
         console.log(error)
        }
@@ -77,11 +81,12 @@ export default function SearchBar() {
         }, 2000);
     }
     
+    
 
     return (
         <div className="bg-[#f5c518] w-[100vw] p-2 pb-6 ">
             <div className="flex justify-center items-center">
-            <div className="text-white bg-black rounded-3xl h-10 w-10 p-1 relative left-10 text-xl flex justify-center items-center hover:cursor-pointer">
+            <div className="text-white bg-black rounded-3xl h-10 w-10 p-1 relative left-8 text-xl flex justify-center items-center hover:cursor-pointer">
             <CgSearch onClick={() => search(title)} />
             </div>
             <input className="rounded-full w-[20vw] h-10 text-center uppercase pr-10 text-ellipsis overflow-hidden" 
@@ -94,6 +99,9 @@ export default function SearchBar() {
             <div className="relative right-7 hover:cursor-pointer">
             <RxCross1 className="text-xl font-bold" onClick={() => resetInput()}/>
             </div>
+            </div>
+            <div className="mt-2 flex justify-center items-center gap-3 italic font-mono">
+             <input onClick={()=> setAdult(!adult)} className="hover:cursor-pointer w-4 h-4" type="checkbox" /> include<TbRating18Plus className="w-6 h-6 text-red-800" />
             </div>
         </div>
     )
