@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { TbRating18Plus } from "react-icons/tb";
-import { FaStar,FaStarHalfStroke } from "react-icons/fa6";
+import { FaStar,FaStarHalfStroke, FaRegHeart, FaHeart } from "react-icons/fa6";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useLikedFilms } from "../provider/LikedFilmContext";
+import { useNotification } from "../provider/NotificationContext";
 
 
 type searchType = {
@@ -43,7 +44,9 @@ export default function FilmDetails() {
     const [loading, setLoading] = useState(true);
     const [film, setFilm] = useState<searchType | null>(null);
     const [img, setImg] = useState<string>("");
-    const { likedFilms} = useLikedFilms();
+    const { likedFilms, addFilm, removeFilm} = useLikedFilms();
+    const {showNotification} = useNotification();
+
     const isLiked = likedFilms.some((film) => film.id === Number(id));
 
     useEffect(() => {
@@ -75,6 +78,16 @@ export default function FilmDetails() {
 
         fetchFilmDetails();
     }, [id]);
+
+    const toggleLike = ()=>{
+        if(!isLiked){
+            addFilm({id: Number(id), title: film?.title?? '', imgUrl: img, release_date: film?.release_date?? ''});
+            showNotification(`${film?.title} added to liked films!`, "success");
+        } else {
+            removeFilm(Number(id));
+            showNotification(`${film?.title} removed from liked films!`, "error");
+        }
+    }
     
     if(loading) {
         return(
@@ -88,14 +101,19 @@ export default function FilmDetails() {
 
     return(
         <div className="min-h-[45vh] p-10 flex justify-around ">
-            <div >
+            <div className="flex flex-col text-white gap-3 items-center">
                 {/* image */}
                 <img className="w-[300px] rounded-xl" src={img} alt="film poster" />
+                {/* liked? */}
+                {isLiked ? 
+                <div className="bg-green-900 rounded-full p-2 font-extrabold text-sm font-mono max-w-[300px]">
+                    <h5>This film is in your liked films</h5>
+                </div> 
+                : null}
+                {isLiked ? <FaHeart className="text-4xl text-white hover:cursor-pointer" onClick={toggleLike}/> : <FaRegHeart className="text-4xl text-white hover:cursor-pointer" onClick={toggleLike}/>}
             </div>
             <div className="text-white flex flex-col gap-2 items-center">
-                {/* liked? */}
-                {isLiked ? <div className="bg-green-900 uppercase rounded-full p-2 font-extrabold text-md font-mono">This film is in your liked films list</div> : null}
-
+                
                 {/* title */}
                 <h1 className="text-[60px] font-bold uppercase font-mono text-balance text-[#f5c518]">{film?.title}</h1>
                 {/* runtime */}
