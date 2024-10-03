@@ -14,6 +14,7 @@ import LikedFilmsList from './assets/components/LikedFilm';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
 import FilmDetails from './assets/page/FilmDetails';
 import { SearchProvider } from './assets/provider/SearchedFilmTitleContext';
+import ErrorPage from './assets/page/ErrorPage';
 
 
 function App() {
@@ -27,14 +28,15 @@ function App() {
           <Router>
             {/* Navbar Section */}
             <Navbar />
-            <SearchBar />
-            <Particles className='w-full' quantity={500} />
+           
 
             {/* Definisci le Route */}
             <Routes>
               {/* Homepage con tutte le sezioni dei film */}
               <Route path="/" element={
                 <>
+                 <SearchBar />
+                 <Particles className='w-full' quantity={500} />
                   <FilmSearchResult />
                   <UpcomingFilmsSection />
                   <PopularFilms />
@@ -45,9 +47,25 @@ function App() {
               } />
 
               {/* Route per i dettagli di un film specifico */}
-              <Route path="/film/:id" element={<FilmDetails />} />
+              <Route path="/film/:id" element={
+                <>
+                  <Particles className='w-full' quantity={500} />
+                  <FilmDetails />
+                </>
+                
+                } />
 
               {/* Aggiungi altre pagine o route personalizzate se necessario */}
+
+                {/* add a route path for error page */}
+                <Route path='/*' element={
+                  <>
+                  <Particles className='w-full' quantity={500} />
+                  <ErrorPage />
+                </>
+                  }>
+                </Route>
+
             </Routes>
 
             {/* Footer Part */}
