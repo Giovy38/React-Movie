@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { useSearch } from "../provider/SearchedFilmTitleContext";
 import { CgSearch } from "react-icons/cg";
 import { RxCross1 } from "react-icons/rx";
+import { useLocation } from "react-router-dom";
 
 type FilmData = {
     page: number;
@@ -29,6 +30,8 @@ export default function SearchBar() {
     const [title, setTitle] = useState('');
     const {setResults} = useSearch();
     const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+    const location = useLocation();
+    const isHomepage = location.pathname === '/';
 
    
     const search = async (searchTitle: string)=>{
@@ -80,6 +83,7 @@ export default function SearchBar() {
     
     return (
         <div className="bg-[#f5c518] w-full p-2 pb-6">
+            {isHomepage &&
             <div className="flex justify-center items-center">
                 <div className="text-white bg-black rounded-3xl h-10 w-10 p-1 relative left-2 sm:left-8 text-xl flex justify-center items-center hover:cursor-pointer">
                     <CgSearch onClick={() => search(title)} />
@@ -97,7 +101,7 @@ export default function SearchBar() {
                 <div className="relative right-2 sm:right-7 hover:cursor-pointer">
                     <RxCross1 className="text-xl font-bold" onClick={() => resetInput()}/>
                 </div>
-            </div>
+            </div>}
         </div>
     )
 }

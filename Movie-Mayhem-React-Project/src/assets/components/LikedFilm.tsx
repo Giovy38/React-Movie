@@ -24,7 +24,7 @@ export default function LikedFilmsList() {
 
     return (
         <div className="text-white">
-            <SectionTitle title="My Liked Films List" />
+            <SectionTitle title="My Liked List" />
             {likedFilms.length > 0 ? (
                 <Swiper
                     slidesPerView={slidesPerViewDynamic}

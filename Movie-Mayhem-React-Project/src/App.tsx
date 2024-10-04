@@ -15,9 +15,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import FilmDetails from './assets/page/FilmDetails';
 import { SearchProvider } from './assets/provider/SearchedFilmTitleContext';
 import ErrorPage from './assets/page/ErrorPage';
+import PageBarNavigation from './assets/components/pageBarNavigation';
+import LikedPage from './assets/page/LikedPage';
+import TvSeriesPage from './assets/page/TvSeriesPage';
+import SerieDetails from './assets/page/SerieDetails';
 
 
 function App() {
+ 
   
 
   return (
@@ -28,14 +33,16 @@ function App() {
           <Router>
             {/* Navbar Section */}
             <Navbar />
-           
+            <SearchBar />
+            <PageBarNavigation /> 
 
-            {/* Definisci le Route */}
+            {/* Search Bar */}
+
+            {/* Route */}
             <Routes>
-              {/* Homepage con tutte le sezioni dei film */}
+              {/* Homepage  */}
               <Route path="/" element={
                 <>
-                 <SearchBar />
                  <Particles className='w-full' quantity={500} />
                   <FilmSearchResult />
                   <UpcomingFilmsSection />
@@ -46,7 +53,7 @@ function App() {
                 </>
               } />
 
-              {/* Route per i dettagli di un film specifico */}
+              {/* Route for film details */}
               <Route path="/film/:id" element={
                 <>
                   <Particles className='w-full' quantity={500} />
@@ -55,16 +62,43 @@ function App() {
                 
                 } />
 
-              {/* Aggiungi altre pagine o route personalizzate se necessario */}
-
-                {/* add a route path for error page */}
-                <Route path='/*' element={
+                {/* Route for serie details */}
+                <Route path='/series/:id' element={
                   <>
                   <Particles className='w-full' quantity={500} />
-                  <ErrorPage />
-                </>
-                  }>
-                </Route>
+                  <SerieDetails />
+                  </>
+                }/>
+
+                {/* add a route path for error page */}
+
+
+                <Route path='/*' element={
+                  <>
+                     <Particles className='w-full' quantity={500} />
+                     <ErrorPage />
+                  </>
+                } />
+
+                {/* add a Route for Liked Page */}
+
+                <Route path='/liked-list' element={
+                  <>
+                  <Particles className='w-full' quantity={500} />
+                  <LikedPage />
+                  </>
+                }/>
+
+                {/* add a Route for TV Series */}
+
+                <Route path='/tv-series' element={
+                  <>
+                  <Particles className='w-full' quantity={500} />
+                  <TvSeriesPage />
+                  </>
+                } />
+
+                
 
             </Routes>
 
