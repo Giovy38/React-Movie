@@ -1,5 +1,5 @@
 import { useSearch } from "../provider/SearchedFilmTitleContext";
-import FilmCard from "./FilmCard";
+import ShowCard from "./ShowCard";
 import SectionTitle from "./SectionTitle";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -52,13 +52,14 @@ export default function FilmSearchResult() {
                     >
                         {results.map((result) => (
                             <SwiperSlide key={result.id}>
-                                <FilmCard
+                                <ShowCard
                                     id={result.id}
                                     imgUrl={result.poster_path === null
                                         ? 'https://img.freepik.com/vecteurs-premium/vecteur-icone-image-par-defaut-page-image-manquante-pour-conception-site-web-application-mobile-aucune-photo-disponible_87543-11093.jpg'
                                         : imgBaseUrl + result.poster_path}
                                     title={result.title}
                                     release_date={result.release_date}
+                                    isFilm={true}
                                 />
                             </SwiperSlide>
                         ))}

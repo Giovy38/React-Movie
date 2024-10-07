@@ -1,5 +1,5 @@
 import useShowFetch from './useShowFetch';
-import SeriesCard from '../../components/tvSeries_components/SeriesCard';
+import ShowCard from '../../components/ShowCard';
 import SectionTitle from '../../components/SectionTitle';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -62,7 +62,13 @@ export default function useSeriesFetch(url: string, sectionTitle: string) {
                         >
                             {series.map((serie) => (
                                 <SwiperSlide key={serie.id}>
-                                    <SeriesCard id={serie.id} imgUrl={imgBaseUrl + serie.poster_path} title={serie.name} release_date={serie.first_air_date} />
+                                    <ShowCard
+                                        id={serie.id}
+                                        imgUrl={imgBaseUrl + serie.poster_path}
+                                        title={serie.name}
+                                        release_date={serie.first_air_date}
+                                        isFilm={false}
+                                    />
                                 </SwiperSlide>
                             ))}
                         </Swiper>

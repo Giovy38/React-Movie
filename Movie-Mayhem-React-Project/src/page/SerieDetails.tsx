@@ -105,7 +105,10 @@ export default function SerieDetails() {
 
     const toggleLike = () => {
         if (!isLiked) {
-            addFilm({ id: Number(id), title: serie?.name ?? '', imgUrl: img, release_date: serie?.first_air_date ?? '' });
+            addFilm({
+                id: Number(id), title: serie?.name ?? '', imgUrl: img, release_date: serie?.first_air_date ?? '',
+                isFilm: false
+            });
             showNotification(`${serie?.name} added to liked films!`, "success");
         } else {
             removeFilm(Number(id));
@@ -127,6 +130,7 @@ export default function SerieDetails() {
             isLiked={isLiked}
             toggleLike={toggleLike}
             show={serie as searchType}
+            isFilm={false}
         />
     )
 

@@ -1,5 +1,5 @@
 import useShowFetch from './useShowFetch';
-import FilmCard from '../../components/FilmCard';
+import ShowCard from '../../components/ShowCard';
 import SectionTitle from '../../components/SectionTitle';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -63,7 +63,7 @@ export default function useFilmFetch(url: string, sectionTitle: string) {
                         >
                             {films.map((film) => (
                                 <SwiperSlide key={film.id}>
-                                    <FilmCard id={film.id} imgUrl={imgBaseUrl + film.poster_path} title={film.title} release_date={film.release_date} />
+                                    <ShowCard id={film.id} imgUrl={imgBaseUrl + film.poster_path} title={film.title} release_date={film.release_date} isFilm={true} />
                                 </SwiperSlide>
                             ))}
                         </Swiper>

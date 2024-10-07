@@ -25,16 +25,18 @@ export default function SingleShowDetails({
     img,
     isLiked,
     toggleLike,
-    show
+    show,
+    isFilm
 }: {
     img: string;
     isLiked: boolean;
     toggleLike: () => void;
     show: searchType;
+    isFilm: boolean;
 }) {
 
     const baseUrl = 'https://image.tmdb.org/t/p/w500/'
-    const isTVSeries = !!show.first_air_date; // Determina se è una serie TV
+    const isTVSeries = !isFilm;
 
     return (
         <div className="min-h-[70vh] xl:min-h-[45vh] gap-5 p-10 flex justify-around flex-col lg:flex-row items-center">

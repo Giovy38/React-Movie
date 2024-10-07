@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/scrollbar';
 import { Scrollbar } from 'swiper/modules';
-import FilmCard from "./FilmCard";
+import ShowCard from "./ShowCard";
 import { useMemo } from "react";
 
 export default function LikedFilmsList() {
@@ -17,7 +17,7 @@ export default function LikedFilmsList() {
     const memoizedFilms = useMemo(() => {
         return likedFilms.map((film) => (
             <SwiperSlide key={film.id}>
-                <FilmCard id={film.id} imgUrl={film.imgUrl} title={film.title} release_date={film.release_date} />
+                <ShowCard id={film.id} imgUrl={film.imgUrl} title={film.title} release_date={film.release_date} isFilm={true} />
             </SwiperSlide>
         ));
     }, [likedFilms]);

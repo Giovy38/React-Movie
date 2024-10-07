@@ -3,11 +3,21 @@ import type { ReactNode } from "react";
 
 // Tipo per i dati del film
 interface FilmData {
+    isFilm: boolean;
     id: number;
     title: string;
     imgUrl: string;
     release_date: string;
 }
+
+// Tipo per i dati del show
+type LikedShow = {
+    id: number;
+    title: string;
+    imgUrl: string;
+    release_date: string;
+    isFilm: boolean;
+};
 
 // Context Type
 interface LikedFilmsContextType {
@@ -55,5 +65,9 @@ export const useLikedFilms = () => {
     if (!context) {
         throw new Error("useLikedFilms deve essere usato dentro LikedFilmsProvider");
     }
-    return context;
+    return {
+        ...context,
+        addFilm: (show: LikedShow) => context.addFilm(show),
+        removeFilm: (id: number) => context.removeFilm(id),
+    };
 };
