@@ -26,7 +26,7 @@ interface SearchContextType {
   setResults: (results: Results[]) => void;
   search: (searchTitle: string) => Promise<void>;
   hasSearched: boolean;
-  setHasSearched: (value: boolean) => void; // Aggiungi setHasSearched
+  setHasSearched: (value: boolean) => void;
   isLoading: boolean;
 }
 
@@ -36,7 +36,7 @@ const SearchContext = createContext<SearchContextType>({
   setResults: () => { },
   search: async () => { },
   hasSearched: false,
-  setHasSearched: () => { }, // Aggiungi setHasSearched
+  setHasSearched: () => { },
   isLoading: false,
 });
 
@@ -57,13 +57,13 @@ export const SearchProvider = ({ children }: { children: ReactNode }) => {
 
   const search = useCallback(async (searchTitle: string) => {
     if (!searchTitle.trim()) {
-      setHasSearched(false); // Resetta hasSearched se l'input è vuoto
-      setResults([]); // Resetta i risultati
+      setHasSearched(false);
+      setResults([]);
       return;
     }
 
-    setHasSearched(true); // Imposta hasSearched a true quando viene chiamata la ricerca
-    setIsLoading(true); // Imposta isLoading a true quando inizia la ricerca
+    setHasSearched(true);
+    setIsLoading(true);
 
     const options = {
       method: 'GET',
@@ -76,11 +76,11 @@ export const SearchProvider = ({ children }: { children: ReactNode }) => {
     try {
       const res = await fetch(`https://api.themoviedb.org/3/search/movie?query=${searchTitle}&include_adult=false&language=en-US&page=1`, options);
       const data = await res.json();
-      setResults(data.results || []); //controll if is an array
+      setResults(data.results || []);
     } catch (error) {
       console.log(error);
     } finally {
-      setIsLoading(false); // Imposta isLoading a false quando la ricerca è completata
+      setIsLoading(false);
     }
   }, []);
 

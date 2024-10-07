@@ -5,12 +5,12 @@ import Navbar from './components/Navbar';
 import SearchBar from './components/SearchBar';
 import Particles from '../components/ui/particles'
 import Footer from './components/Footer';
-import UpcomingFilmsSection from './components/UpcomingFilmsSection';
-import FilmSearchResult from './components/FilmSearchResult'
-import TopRatedFilms from './components/TopRatedFilmSection'
-import NowPlayingFilms from './components/NowplayingFilmsSection'
-import PopularFilms from './components/PopularFilmSection'
-import LikedFilmsList from './components/LikedFilm';
+import UpcomingFilmsSection from './components/film_components/UpcomingFilmsSection';
+import FilmSearchResult from './components/film_components/FilmSearchResult';
+import TopRatedFilms from './components/film_components/TopRatedFilmSection'
+import NowPlayingFilms from './components/film_components/NowplayingFilmsSection'
+import PopularFilms from './components/film_components/PopularFilmSection'
+import LikedFilmsList from './components/LikedShows';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import FilmDetails from './page/FilmDetails';
 import { SearchProvider } from './provider/SearchedFilmTitleContext';

@@ -1,6 +1,6 @@
-import { useSearch } from "../provider/SearchedFilmTitleContext";
-import ShowCard from "./ShowCard";
-import SectionTitle from "./SectionTitle";
+import { useSearch } from "../../provider/SearchedFilmTitleContext";
+import ShowCard from "../ShowCard";
+import SectionTitle from "../SectionTitle";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/scrollbar';

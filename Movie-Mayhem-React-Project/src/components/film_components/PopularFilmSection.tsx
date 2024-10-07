@@ -1,4 +1,4 @@
-import useFilmFetch from "../lib/hooks/useFilmFetch"
+import useFilmFetch from "../../lib/hooks/useFilmFetch"
 
 export default function PopularFilms() {
 

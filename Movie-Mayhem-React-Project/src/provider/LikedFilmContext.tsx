@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
 
-// Tipo per i dati del film
+// Type for the film data
 interface FilmData {
     isFilm: boolean;
     id: number;
@@ -10,7 +10,7 @@ interface FilmData {
     release_date: string;
 }
 
-// Tipo per i dati del show
+// Type for the show data
 type LikedShow = {
     id: number;
     title: string;

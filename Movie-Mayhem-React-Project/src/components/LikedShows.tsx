@@ -7,11 +7,11 @@ import { Scrollbar } from 'swiper/modules';
 import ShowCard from "./ShowCard";
 import { useMemo } from "react";
 
-export default function LikedFilmsList() {
+export default function LikedShowsList() {
 
     const { likedFilms } = useLikedFilms();
 
-    // Calcola dinamicamente slidesPerView in base al numero di film disponibili
+    // Calculate dynamically the number of slides per view based on the number of films available
     const slidesPerViewDynamic = likedFilms.length < 5.5 ? likedFilms.length : 5.5;
 
     const memoizedFilms = useMemo(() => {

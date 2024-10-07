@@ -14,7 +14,7 @@ export default function SearchBar() {
     const resetInput = () => {
         setTitle('');
         setResults([]);
-        setHasSearched(false); // Imposta hasSearched a false quando l'input viene resettato
+        setHasSearched(false); // hasSearched false when input reset
         if (timeoutRef.current) {
             clearTimeout(timeoutRef.current);
         }

@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useCallback, useRef } from "react";
-import { FilmListNotification } from "../components/FilmListNotification";
+import { ShowListNotification } from "../components/ShowListNotification";
 
 type NotificationContextProps = {
   showNotification: (message: string, type: "success" | "error") => void;
@@ -41,7 +41,7 @@ export const NotificationProvider = ({ children }: { children: React.ReactNode }
       {children}
       <div className="fixed bottom-0 right-0 p-4">
         {notification && (
-          <FilmListNotification
+          <ShowListNotification
             message={notification.message}
             type={notification.type}
             onClose={() => setNotification(null)}
