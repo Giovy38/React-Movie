@@ -1,82 +1,82 @@
 import './App.css'
-import { LikedFilmsProvider } from './assets/provider/LikedFilmContext';
-import { NotificationProvider } from './assets/provider/NotificationContext';
-import Navbar from './assets/components/Navbar'
-import SearchBar from './assets/components/SearchBar'
+import { LikedFilmsProvider } from './provider/LikedFilmContext';
+import { NotificationProvider } from './provider/NotificationContext';
+import Navbar from './components/Navbar';
+import SearchBar from './components/SearchBar';
 import Particles from '../components/ui/particles'
-import Footer from './assets/components/Footer'
-import UpcomingFilmsSection from './assets/components/UpcomingFilmsSection'
-import FilmSearchResult from './assets/components/FilmSearchResult'
-import TopRatedFilms from './assets/components/TopRatedFilmSection'
-import NowPlayingFilms from './assets/components/NowplayingFilmsSection'
-import PopularFilms from './assets/components/PopularFilmSection'
-import LikedFilmsList from './assets/components/LikedFilm';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
-import FilmDetails from './assets/page/FilmDetails';
-import { SearchProvider } from './assets/provider/SearchedFilmTitleContext';
-import ErrorPage from './assets/page/ErrorPage';
-import PageBarNavigation from './assets/components/pageBarNavigation';
-import LikedPage from './assets/page/LikedPage';
-import TvSeriesPage from './assets/page/TvSeriesPage';
-import SerieDetails from './assets/page/SerieDetails';
+import Footer from './components/Footer';
+import UpcomingFilmsSection from './components/UpcomingFilmsSection';
+import FilmSearchResult from './components/FilmSearchResult'
+import TopRatedFilms from './components/TopRatedFilmSection'
+import NowPlayingFilms from './components/NowplayingFilmsSection'
+import PopularFilms from './components/PopularFilmSection'
+import LikedFilmsList from './components/LikedFilm';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import FilmDetails from './page/FilmDetails';
+import { SearchProvider } from './provider/SearchedFilmTitleContext';
+import ErrorPage from './page/ErrorPage';
+import PageBarNavigation from './components/pageBarNavigation';
+import LikedPage from './page/LikedPage';
+import TvSeriesPage from './page/TvSeriesPage';
+import SerieDetails from './page/SerieDetails';
 
 
 function App() {
- 
-  
+
+
 
   return (
     <div className='overflow-hidden w-[99vw]'>
       <LikedFilmsProvider>
         <NotificationProvider>
           <SearchProvider>
-          <Router>
-            {/* Navbar Section */}
-            <Navbar />
-            <SearchBar />
-            <PageBarNavigation /> 
+            <Router>
+              {/* Navbar Section */}
+              <Navbar />
+              <SearchBar />
+              <PageBarNavigation />
 
-            {/* Search Bar */}
+              {/* Search Bar */}
 
-            {/* Route */}
-            <Routes>
-              {/* Homepage  */}
-              <Route path="/" element={
-                <>
-                 <Particles className='w-full' quantity={500} />
-                  <FilmSearchResult />
-                  <UpcomingFilmsSection />
-                  <PopularFilms />
-                  <NowPlayingFilms />
-                  <TopRatedFilms />
-                  <LikedFilmsList />
-                </>
-              } />
+              {/* Route */}
+              <Routes>
+                {/* Homepage  */}
+                <Route path="/" element={
+                  <>
+                    <Particles className='w-full' quantity={500} />
+                    <FilmSearchResult />
+                    <UpcomingFilmsSection />
+                    <PopularFilms />
+                    <NowPlayingFilms />
+                    <TopRatedFilms />
+                    <LikedFilmsList />
+                  </>
+                } />
 
-              {/* Route for film details */}
-              <Route path="/film/:id" element={
-                <>
-                  <Particles className='w-full' quantity={500} />
-                  <FilmDetails />
-                </>
-                
+                {/* Route for film details */}
+                <Route path="/film/:id" element={
+                  <>
+                    <Particles className='w-full' quantity={500} />
+                    <FilmDetails />
+                  </>
+
                 } />
 
                 {/* Route for serie details */}
                 <Route path='/series/:id' element={
                   <>
-                  <Particles className='w-full' quantity={500} />
-                  <SerieDetails />
+                    <Particles className='w-full' quantity={500} />
+                    <SerieDetails />
                   </>
-                }/>
+                } />
 
                 {/* add a route path for error page */}
 
 
                 <Route path='/*' element={
                   <>
-                     <Particles className='w-full' quantity={500} />
-                     <ErrorPage />
+                    <Particles className='w-full' quantity={500} />
+                    <ErrorPage />
                   </>
                 } />
 
@@ -84,28 +84,28 @@ function App() {
 
                 <Route path='/liked-list' element={
                   <>
-                  <Particles className='w-full' quantity={500} />
-                  <LikedPage />
+                    <Particles className='w-full' quantity={500} />
+                    <LikedPage />
                   </>
-                }/>
+                } />
 
                 {/* add a Route for TV Series */}
 
                 <Route path='/tv-series' element={
                   <>
-                  <Particles className='w-full' quantity={500} />
-                  <TvSeriesPage />
+                    <Particles className='w-full' quantity={500} />
+                    <TvSeriesPage />
                   </>
                 } />
 
-                
 
-            </Routes>
 
-            {/* Footer Part */}
-            <Particles className='w-full' quantity={500} />
-            <Footer />
-          </Router>
+              </Routes>
+
+              {/* Footer Part */}
+              <Particles className='w-full' quantity={500} />
+              <Footer />
+            </Router>
           </SearchProvider>
         </NotificationProvider>
       </LikedFilmsProvider>

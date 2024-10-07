@@ -1,6 +1,5 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
-
 
 // Tipo per i dati del film
 interface FilmData {
@@ -18,11 +17,22 @@ interface LikedFilmsContextType {
 }
 
 // Context creation
-const LikedFilmsContext = createContext<LikedFilmsContextType | undefined>(undefined);
+const LikedFilmsContext = createContext<LikedFilmsContextType>({
+    likedFilms: [],
+    addFilm: () => { },
+    removeFilm: () => { },
+});
 
 // Context Provider 
 export const LikedFilmsProvider = ({ children }: { children: ReactNode }) => {
-    const [likedFilms, setLikedFilms] = useState<FilmData[]>([]);
+    const [likedFilms, setLikedFilms] = useState<FilmData[]>(() => {
+        const saved = localStorage.getItem("likedFilms");
+        return saved ? JSON.parse(saved) : [];
+    });
+
+    useEffect(() => {
+        localStorage.setItem("likedFilms", JSON.stringify(likedFilms));
+    }, [likedFilms]);
 
     const addFilm = (film: FilmData) => {
         setLikedFilms((prevFilms) => [...prevFilms, film]);

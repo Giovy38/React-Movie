@@ -1,4 +1,4 @@
-import useSeriesFetch from "../../utils/useSeriesFetch"
+import useSeriesFetch from "../../lib/hooks/useSeriesFetch"
 
 export default function AiringTodaySeries() {
 

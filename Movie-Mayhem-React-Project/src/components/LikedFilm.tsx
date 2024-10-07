@@ -9,7 +9,7 @@ import { useMemo } from "react";
 
 export default function LikedFilmsList() {
 
-    const { likedFilms } = useLikedFilms(); 
+    const { likedFilms } = useLikedFilms();
 
     // Calcola dinamicamente slidesPerView in base al numero di film disponibili
     const slidesPerViewDynamic = likedFilms.length < 5.5 ? likedFilms.length : 5.5;
