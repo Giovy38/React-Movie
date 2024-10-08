@@ -6,6 +6,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/scrollbar';
 import { Scrollbar } from 'swiper/modules';
+import { imgBaseUrl } from '../../config';
+
 
 type SeriesResponse = {
     backdrop_path: string;
@@ -24,7 +26,7 @@ type SeriesResponse = {
 }
 
 export default function useSeriesFetch(url: string, sectionTitle: string) {
-    const imgBaseUrl = 'https://image.tmdb.org/t/p/w500/';
+
     const { items: series, loading } = useShowFetch<SeriesResponse & { title: string; release_date: string }>(url);
 
     return (

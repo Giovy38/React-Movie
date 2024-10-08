@@ -6,10 +6,10 @@ import 'swiper/css';
 import 'swiper/css/scrollbar';
 import { Scrollbar } from 'swiper/modules';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { imgBaseUrl } from "../../config";
 
 export default function FilmSearchResult() {
     const { results, hasSearched, isLoading } = useSearch();
-    const imgBaseUrl = 'https://image.tmdb.org/t/p/w500/';
 
     return (
         <div className="w-full flex gap-5 bg-black flex-col mb-10">

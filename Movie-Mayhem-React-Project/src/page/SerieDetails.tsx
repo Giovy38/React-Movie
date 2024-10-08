@@ -4,6 +4,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useLikedFilms } from "../provider/LikedFilmContext";
 import { useNotification } from "../provider/NotificationContext";
 import SingleShowDetails from "../components/SingleShowDetails";
+import { imgBaseUrl } from "../config";
 
 type episodeType = {
     air_date: string,
@@ -58,7 +59,6 @@ type searchType = {
 
 export default function SerieDetails() {
 
-    const baseUrl = 'https://image.tmdb.org/t/p/w500/'
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
     const [serie, setSerie] = useState<searchType | null>(null);
@@ -85,12 +85,11 @@ export default function SerieDetails() {
                 }
                 const data: searchType = await res.json();
                 setLoading(false);
-                console.log(data);
                 setSerie(data);
                 if (data.poster_path === null) {
                     setImg('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNNLEL-qmmLeFR1nxJuepFOgPYfnwHR56vcw&s')
                 } else {
-                    setImg(`${baseUrl}${data.poster_path}`);
+                    setImg(`${imgBaseUrl}${data.poster_path}`);
                 }
             } catch (error) {
                 setLoading(false);

@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/scrollbar';
 import { Scrollbar } from 'swiper/modules';
+import { imgBaseUrl } from '../../config';
 
 type FilmResponse = {
     adult: boolean;
@@ -25,7 +26,7 @@ type FilmResponse = {
 }
 
 export default function useFilmFetch(url: string, sectionTitle: string) {
-    const imgBaseUrl = 'https://image.tmdb.org/t/p/w500/';
+
     const { items: films, loading } = useShowFetch<FilmResponse>(url);
 
     return (

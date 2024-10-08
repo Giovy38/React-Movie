@@ -1,4 +1,5 @@
 import { FaHeart, FaRegHeart, FaStar, FaStarHalfStroke, FaRegStar } from "react-icons/fa6";
+import { imgBaseUrl } from "../config";
 
 type searchType = {
     id: number;
@@ -35,7 +36,6 @@ export default function SingleShowDetails({
     isFilm: boolean;
 }) {
 
-    const baseUrl = 'https://image.tmdb.org/t/p/w500/'
     const isTVSeries = !isFilm;
 
     return (
@@ -107,7 +107,7 @@ export default function SingleShowDetails({
                         <div className="flex flex-wrap justify-center items-center gap-5 bg-slate-300 p-3 rounded-2xl">
                             {show.production_companies.map((company) =>
                                 company.logo_path ? (
-                                    <img className="w-[50px] h-[50px] sm:w-[80px] sm:h-[80px] lg:w-[100px] lg:h-[100px] object-contain" src={`${baseUrl}${company.logo_path}`} alt="product company logo" key={company.id} />
+                                    <img className="w-[50px] h-[50px] sm:w-[80px] sm:h-[80px] lg:w-[100px] lg:h-[100px] object-contain" src={`${imgBaseUrl}${company.logo_path}`} alt="product company logo" key={company.id} />
                                 ) : null
                             )}
                         </div>
