@@ -24,7 +24,7 @@ export default function LikedPage() {
     return (
         <div className="text-white">
             <SectionTitle title="My Liked List" />
-            <div className="flex flex-wrap gap-5 p-5 justify-around ">
+            <div className="flex flex-wrap gap-5 p-5 justify-around lg:min-h-[29vh]">
                 {likedFilms.length > 0 ?
 
                     memoizedFilms

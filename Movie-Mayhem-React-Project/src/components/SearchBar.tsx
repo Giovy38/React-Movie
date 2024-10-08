@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 
 export default function SearchBar() {
     const [title, setTitle] = useState('');
-    const { search, setResults, setHasSearched } = useSearch(); // Assicurati che setHasSearched sia disponibile
+    const { search, setResults, setHasSearched } = useSearch();
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
     const location = useLocation();
     const isHomepage = location.pathname === '/';
@@ -45,21 +45,21 @@ export default function SearchBar() {
         <div className="bg-[#f5c518] w-full p-2 pb-6">
             {isHomepage &&
                 <div className="flex justify-center items-center">
-                    <div className="text-white bg-black rounded-3xl h-10 w-10 p-1 relative left-2 sm:left-8 text-xl flex justify-center items-center hover:cursor-pointer">
-                        <CgSearch onClick={handleSearch} />
-                    </div>
-                    <input
-                        className="
-                        rounded-full h-10 text-center uppercase pr-10 text-ellipsis overflow-hidden 
-                        w-[80vw] sm:w-[60vw] md:w-[40vw] lg:w-[30vw] xl:w-[25vw]"
-                        value={title}
-                        onChange={(e) => takeTitle(e.target.value)}
-                        onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                        type="text"
-                        placeholder="Search a film by Title"
-                    />
-                    <div className="relative right-2 sm:right-7 hover:cursor-pointer">
-                        <RxCross1 className="text-xl font-bold" onClick={() => resetInput()} />
+                    <div className="relative pr-2 flex items-center w-[90vw] sm:w-[60vw] md:w-[40vw] lg:w-[30vw] xl:w-[25vw] bg-white rounded-full border border-gray-300">
+                        <div className="text-white absolute bg-black rounded-full h-10 w-10 flex justify-center items-center hover:cursor-pointer">
+                            <CgSearch onClick={handleSearch} />
+                        </div>
+                        <input
+                            className="flex-grow h-10 text-center uppercase pr-10 pl-10 text-ellipsis overflow-hidden rounded-full border-none focus:outline-none"
+                            value={title}
+                            onChange={(e) => takeTitle(e.target.value)}
+                            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                            type="text"
+                            placeholder="Search a film by Title"
+                        />
+                        <div className="hover:cursor-pointer">
+                            <RxCross1 className="text-xl font-bold" onClick={() => resetInput()} />
+                        </div>
                     </div>
                 </div>}
         </div>
