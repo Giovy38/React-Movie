@@ -29,12 +29,12 @@ export default function useSeriesFetch(type: string, sectionTitle: string) {
 
     return (
         <ShowList
-            shows={series.map(serie => ({
+            shows={series.results?.map(serie => ({
                 id: serie.id,
                 poster_path: serie.poster_path,
                 title: serie.name,
                 release_date: serie.first_air_date
-            }))}
+            })) || []}
             loading={loading}
             sectionTitle={sectionTitle}
             isFilm={false}

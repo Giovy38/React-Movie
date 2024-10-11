@@ -30,12 +30,12 @@ export default function useFilmFetch(type: string, sectionTitle: string) {
 
     return (
         <ShowList
-            shows={films.map(film => ({
+            shows={films.results?.map(film => ({
                 id: film.id,
                 poster_path: film.poster_path,
                 title: film.title,
                 release_date: film.release_date
-            }))}
+            })) || []}
             loading={loading}
             sectionTitle={sectionTitle}
             isFilm={true}

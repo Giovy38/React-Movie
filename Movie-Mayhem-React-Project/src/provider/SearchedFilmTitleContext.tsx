@@ -20,23 +20,23 @@ type Results = {
   vote_count: number;
 }
 
-// Context Type
+type SearchState =
+  | { status: 'idle'; results: undefined }
+  | { status: 'searching'; results: undefined }
+  | { status: 'noResults'; results: [] }
+  | { status: 'results'; results: Results[] };
+
 interface SearchContextType {
-  results: Results[];
+  state: SearchState;
   setResults: (results: Results[]) => void;
   search: (searchTitle: string) => Promise<void>;
-  hasSearched: boolean;
-  setHasSearched: (value: boolean) => void;
   isLoading: boolean;
 }
 
-// Create Context
 const SearchContext = createContext<SearchContextType>({
-  results: [],
+  state: { status: 'idle', results: undefined },
   setResults: () => { },
   search: async () => { },
-  hasSearched: false,
-  setHasSearched: () => { },
   isLoading: false,
 });
 
@@ -51,18 +51,16 @@ export const useSearch = () => {
 
 
 export const SearchProvider = ({ children }: { children: ReactNode }) => {
-  const [results, setResults] = useState<Results[]>([]);
-  const [hasSearched, setHasSearched] = useState(false);
+  const [state, setState] = useState<SearchState>({ status: 'idle', results: undefined });
   const [isLoading, setIsLoading] = useState(false);
 
   const search = useCallback(async (searchTitle: string) => {
     if (!searchTitle.trim()) {
-      setHasSearched(false);
-      setResults([]);
+      setState({ status: 'idle', results: undefined });
       return;
     }
 
-    setHasSearched(true);
+    setState({ status: 'searching', results: undefined });
     setIsLoading(true);
 
     const options = {
@@ -76,7 +74,11 @@ export const SearchProvider = ({ children }: { children: ReactNode }) => {
     try {
       const res = await fetch(`https://api.themoviedb.org/3/search/movie?query=${searchTitle}&include_adult=false&language=en-US&page=1`, options);
       const data = await res.json();
-      setResults(data.results || []);
+      if (data.results.length === 0) {
+        setState({ status: 'noResults', results: [] });
+      } else {
+        setState({ status: 'results', results: data.results });
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -85,7 +87,7 @@ export const SearchProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <SearchContext.Provider value={{ results, setResults, search, hasSearched, setHasSearched, isLoading }}>
+    <SearchContext.Provider value={{ state, setResults: (results) => setState({ status: 'results', results }), search, isLoading }}>
       {children}
     </SearchContext.Provider>
   );

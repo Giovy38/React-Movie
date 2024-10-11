@@ -1,6 +1,5 @@
 import { useSearch } from "../../provider/SearchedFilmTitleContext";
 import ShowCard from "../ShowCard";
-import SectionTitle from "../SectionTitle";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/scrollbar';
@@ -9,22 +8,32 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { imgBaseUrl } from "../../config";
 
 export default function FilmSearchResult() {
-    const { results, hasSearched, isLoading } = useSearch();
+    const { state } = useSearch();
 
-    return (
-        <div className="w-full flex gap-5 bg-black flex-col mb-10">
-            <SectionTitle title="Search Results" />
-
-            <div>
-                {isLoading ? (
-                    <div className="w-full flex justify-center items-center">
-                        <AiOutlineLoading3Quarters className="text-white text-3xl animate-spin" />
-                    </div>
-                ) : !hasSearched ? (
+    switch (state.status) {
+        case 'idle':
+            return (
+                <div>
                     <h3 className="font-thin text-white text-xl italic">
                         Search something with a valid title to show the results here...
                     </h3>
-                ) : results.length > 0 ? (
+                </div>
+            );
+        case 'searching':
+            return (
+                <div className="w-full flex justify-center items-center">
+                    <AiOutlineLoading3Quarters className="text-white text-3xl animate-spin" />
+                </div>
+            );
+        case 'noResults':
+            return (
+                <h3 className="font-thin text-white text-xl italic">
+                    No results for this title.
+                </h3>
+            );
+        case 'results':
+            return (
+                <div>
                     <Swiper
                         slidesPerView={1.2}
                         spaceBetween={50}
@@ -50,7 +59,7 @@ export default function FilmSearchResult() {
                         modules={[Scrollbar]}
                         className="mySwiper p-5"
                     >
-                        {results.map((result) => (
+                        {state.results.map((result) => (
                             <SwiperSlide key={result.id}>
                                 <ShowCard
                                     id={result.id}
@@ -64,12 +73,7 @@ export default function FilmSearchResult() {
                             </SwiperSlide>
                         ))}
                     </Swiper>
-                ) : (
-                    <h3 className="font-thin text-white text-xl italic">
-                        No results for this title.
-                    </h3>
-                )}
-            </div>
-        </div>
-    );
+                </div>
+            );
+    }
 }

@@ -9,14 +9,19 @@ type FetchData<T> = {
         minimum: string;
     };
     page: number;
-    results: T[];
+    results: T[] | undefined;
     total_pages: number;
     total_results: number;
 }
 
 export default function useShowFetch<T>(url: string) {
     const [loading, setLoading] = useState(false);
-    const [items, setItems] = useState<T[]>([]);
+    const [items, setItems] = useState<FetchData<T>>({
+        results: undefined,
+        page: 0,
+        total_pages: 0,
+        total_results: 0,
+    });
 
     const updateItems = useCallback(async () => {
         setLoading(true);
@@ -30,10 +35,22 @@ export default function useShowFetch<T>(url: string) {
         try {
             const res = await fetch(url, options);
             const data: FetchData<T> = await res.json();
-            setItems(data.results);
+            setItems({
+                results: data.results,
+                page: data.page,
+                total_pages: data.total_pages,
+                total_results: data.total_results,
+            });
             setLoading(false);
         } catch (err) {
             console.log(err);
+            setLoading(false);
+            setItems({
+                results: [],
+                page: 0,
+                total_pages: 0,
+                total_results: 0,
+            });
             setLoading(false);
         }
     }, [url]);

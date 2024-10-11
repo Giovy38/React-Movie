@@ -19,6 +19,7 @@ import PageBarNavigation from './components/pageBarNavigation';
 import LikedPage from './page/LikedPage';
 import TvSeriesPage from './page/TvSeriesPage';
 import SerieDetails from './page/SerieDetails';
+import SectionTitle from './components/SectionTitle';
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
                 <Route path="/" element={
                   <>
                     <Particles className='w-full' quantity={500} />
+                    <SectionTitle title="Search Results" />
                     <FilmSearchResult />
                     <UpcomingFilmsSection />
                     <PopularFilms />
