@@ -10,15 +10,6 @@ interface FilmData {
     release_date: string;
 }
 
-// Type for the show data
-type LikedShow = {
-    id: number;
-    title: string;
-    imgUrl: string;
-    release_date: string;
-    isFilm: boolean;
-};
-
 // Context Type
 interface LikedFilmsContextType {
     likedFilms: FilmData[];
@@ -65,9 +56,5 @@ export const useLikedFilms = () => {
     if (!context) {
         throw new Error("useLikedFilms deve essere usato dentro LikedFilmsProvider");
     }
-    return {
-        ...context,
-        addFilm: (show: LikedShow) => context.addFilm(show),
-        removeFilm: (id: number) => context.removeFilm(id),
-    };
+    return context;
 };
