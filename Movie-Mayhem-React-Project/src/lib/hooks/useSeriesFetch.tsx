@@ -1,5 +1,4 @@
 import useShowFetch from './useShowFetch';
-import ShowList from '../../components/ShowList';
 
 type SeriesResponse = {
     backdrop_path: string;
@@ -17,27 +16,25 @@ type SeriesResponse = {
     vote_count: number;
 }
 
-const buildSeriesUrl = (type: string): string => {
+type SeriesType = 'airing_today' | 'on_the_air' | 'popular' | 'top_rated';
+
+const buildSeriesUrl = (type: SeriesType): string => {
     const baseUrl = 'https://api.themoviedb.org/3/tv/';
     const postUrl = '?language=en-US&page=1';
     return `${baseUrl}/${type}${postUrl}`;
 };
 
-export default function useSeriesFetch(type: string, sectionTitle: string) {
+export default function useSeriesFetch(type: SeriesType) {
     const url = buildSeriesUrl(type);
-    const { items: series, loading } = useShowFetch<SeriesResponse>(url);
+    const { state } = useShowFetch<SeriesResponse>(url);
 
-    return (
-        <ShowList
-            shows={series.results?.map(serie => ({
-                id: serie.id,
-                poster_path: serie.poster_path,
-                title: serie.name,
-                release_date: serie.first_air_date
-            })) || []}
-            loading={loading}
-            sectionTitle={sectionTitle}
-            isFilm={false}
-        />
-    );
+    return {
+        series: state.status === 'results' ? state.results.map(serie => ({
+            id: serie.id,
+            poster_path: serie.poster_path,
+            name: serie.name,
+            first_air_date: serie.first_air_date
+        })) : [],
+        loading: state.status === 'loading'
+    };
 }

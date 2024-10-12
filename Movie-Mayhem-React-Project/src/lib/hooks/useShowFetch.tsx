@@ -14,17 +14,18 @@ type FetchData<T> = {
     total_results: number;
 }
 
+
+type FetchState<T> =
+    | { status: 'idle'; results: undefined }
+    | { status: 'loading'; results: undefined }
+    | { status: 'noResults'; results: [] }
+    | { status: 'results'; results: T[] };
+
 export default function useShowFetch<T>(url: string) {
-    const [loading, setLoading] = useState(false);
-    const [items, setItems] = useState<FetchData<T>>({
-        results: undefined,
-        page: 0,
-        total_pages: 0,
-        total_results: 0,
-    });
+    const [state, setState] = useState<FetchState<T>>({ status: 'idle', results: undefined });
 
     const updateItems = useCallback(async () => {
-        setLoading(true);
+        setState({ status: 'loading', results: undefined });
         const options = {
             method: 'GET',
             headers: {
@@ -35,23 +36,14 @@ export default function useShowFetch<T>(url: string) {
         try {
             const res = await fetch(url, options);
             const data: FetchData<T> = await res.json();
-            setItems({
-                results: data.results,
-                page: data.page,
-                total_pages: data.total_pages,
-                total_results: data.total_results,
-            });
-            setLoading(false);
+            if (data.results && data.results.length > 0) {
+                setState({ status: 'results', results: data.results });
+            } else {
+                setState({ status: 'noResults', results: [] });
+            }
         } catch (err) {
             console.log(err);
-            setLoading(false);
-            setItems({
-                results: [],
-                page: 0,
-                total_pages: 0,
-                total_results: 0,
-            });
-            setLoading(false);
+            setState({ status: 'noResults', results: [] });
         }
     }, [url]);
 
@@ -59,5 +51,5 @@ export default function useShowFetch<T>(url: string) {
         updateItems();
     }, [updateItems]);
 
-    return { items, loading };
+    return { state };
 }

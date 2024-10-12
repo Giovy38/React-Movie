@@ -1,5 +1,5 @@
 import useShowFetch from './useShowFetch';
-import ShowList from '../../components/ShowList';
+
 
 type FilmResponse = {
     adult: boolean;
@@ -18,27 +18,26 @@ type FilmResponse = {
     vote_count: number;
 };
 
-const buildFilmUrl = (type: string): string => {
+type FilmType = 'popular' | 'now_playing' | 'top_rated' | 'upcoming';
+
+const buildFilmUrl = (type: FilmType): string => {
     const baseUrl = 'https://api.themoviedb.org/3/movie/';
     const postUrl = '?language=en-US&page=1';
     return `${baseUrl}/${type}${postUrl}`;
 };
 
-export default function useFilmFetch(type: string, sectionTitle: string) {
-    const url = buildFilmUrl(type);
-    const { items: films, loading } = useShowFetch<FilmResponse>(url);
 
-    return (
-        <ShowList
-            shows={films.results?.map(film => ({
-                id: film.id,
-                poster_path: film.poster_path,
-                title: film.title,
-                release_date: film.release_date
-            })) || []}
-            loading={loading}
-            sectionTitle={sectionTitle}
-            isFilm={true}
-        />
-    );
+export default function useFilmFetch(type: FilmType) {
+    const url = buildFilmUrl(type);
+    const { state } = useShowFetch<FilmResponse>(url);
+
+    return {
+        films: state.status === 'results' ? state.results.map(film => ({
+            id: film.id,
+            poster_path: film.poster_path,
+            title: film.title,
+            release_date: film.release_date
+        })) : [],
+        loading: state.status === 'loading'
+    };
 }

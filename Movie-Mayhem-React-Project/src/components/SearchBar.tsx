@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 
 export default function SearchBar() {
     const [title, setTitle] = useState('');
-    const { search, setResults, setHasSearched } = useSearch();
+    const { search, setResults } = useSearch();
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
     const location = useLocation();
     const isHomepage = location.pathname === '/';
@@ -14,7 +14,6 @@ export default function SearchBar() {
     const resetInput = () => {
         setTitle('');
         setResults([]);
-        setHasSearched(false); // hasSearched false when input reset
         if (timeoutRef.current) {
             clearTimeout(timeoutRef.current);
         }
