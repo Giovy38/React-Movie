@@ -1,15 +1,12 @@
-import OnTheAir from "../components/tvSeries_components/OnTheAirSeries";
-import Popular from "../components/tvSeries_components/PopularSeries";
-import TopRated from "../components/tvSeries_components/TopRatedSeries";
-import AiringToday from "../components/tvSeries_components/AiringTodaySeries";
+import SeriesData from "../components/tvSeries_components/SeriesData";
 
 export default function TvSeriesPage() {
     return (
         <div>
-            <TopRated />
-            <Popular />
-            <OnTheAir />
-            <AiringToday />
+            <SeriesData type='top_rated' sectionTitle="Top Rated" />
+            <SeriesData type='popular' sectionTitle="Popular" />
+            <SeriesData type='on_the_air' sectionTitle="On the Air" />
+            <SeriesData type='airing_today' sectionTitle="Airing Today" />
         </div>
     )
 }

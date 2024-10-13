@@ -18,7 +18,7 @@ type FilmResponse = {
     vote_count: number;
 };
 
-type FilmType = 'popular' | 'now_playing' | 'top_rated' | 'upcoming';
+export type FilmType = 'popular' | 'now_playing' | 'top_rated' | 'upcoming';
 
 const buildFilmUrl = (type: FilmType): string => {
     const baseUrl = 'https://api.themoviedb.org/3/movie/';

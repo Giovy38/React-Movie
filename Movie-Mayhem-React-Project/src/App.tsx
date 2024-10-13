@@ -5,11 +5,7 @@ import Navbar from './components/Navbar';
 import SearchBar from './components/SearchBar';
 import Particles from '../components/ui/particles'
 import Footer from './components/Footer';
-import UpcomingFilmsSection from './components/film_components/UpcomingFilmsSection';
 import FilmSearchResult from './components/film_components/FilmSearchResult';
-import TopRatedFilms from './components/film_components/TopRatedFilmSection'
-import NowPlayingFilms from './components/film_components/NowplayingFilmsSection'
-import PopularFilms from './components/film_components/PopularFilmSection'
 import LikedFilmsList from './components/LikedShows';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import FilmDetails from './page/FilmDetails';
@@ -20,6 +16,7 @@ import LikedPage from './page/LikedPage';
 import TvSeriesPage from './page/TvSeriesPage';
 import SerieDetails from './page/SerieDetails';
 import SectionTitle from './components/SectionTitle';
+import FilmData from './components/film_components/FilmData';
 
 
 function App() {
@@ -47,10 +44,10 @@ function App() {
                     <Particles className='w-full' quantity={500} />
                     <SectionTitle title="Search Results" />
                     <FilmSearchResult />
-                    <UpcomingFilmsSection />
-                    <PopularFilms />
-                    <NowPlayingFilms />
-                    <TopRatedFilms />
+                    <FilmData type="upcoming" sectionTitle="Upcoming" />
+                    <FilmData type="popular" sectionTitle="Popular" />
+                    <FilmData type="now_playing" sectionTitle="Now Playing" />
+                    <FilmData type="top_rated" sectionTitle="Top Rated" />
                     <LikedFilmsList />
                   </>
                 } />

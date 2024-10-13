@@ -1,10 +1,15 @@
-import { AiOutlineLoading3Quarters } from "react-icons/ai"
-import useFilmFetch from "../../lib/hooks/useFilmFetch"
-import ShowList from "../ShowList"
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import useFilmFetch, { FilmType } from "../../lib/hooks/useFilmFetch";
+import ShowList from "../ShowList";
 
-export default function UpcomingFilms() {
 
-    const { films, loading } = useFilmFetch('upcoming')
+type FilmDataProps = {
+    type: FilmType;
+    sectionTitle: string;
+};
+
+export default function FilmData({ type, sectionTitle }: FilmDataProps) {
+    const { films, loading } = useFilmFetch(type)
 
     if (loading) {
         return (
@@ -21,12 +26,10 @@ export default function UpcomingFilms() {
                 poster_path: film.poster_path,
                 title: film.title,
                 release_date: film.release_date
-            })) || []}
+            }))}
             loading={loading}
-            sectionTitle='Upcoming'
+            sectionTitle={sectionTitle}
             isFilm={true}
         />
     )
-
-
 }

@@ -1,10 +1,18 @@
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
-import useSeriesFetch from "../../lib/hooks/useSeriesFetch"
+import useSeriesFetch, { SeriesType } from "../../lib/hooks/useSeriesFetch"
 import ShowList from "../ShowList"
 
-export default function AiringTodaySeries() {
 
-    const { series, loading } = useSeriesFetch('airing_today')
+
+
+type SeriesDataProps = {
+    type: SeriesType;
+    sectionTitle: string;
+};
+
+export default function SeriesData({ type, sectionTitle }: SeriesDataProps) {
+
+    const { series, loading } = useSeriesFetch(type)
 
     if (loading) {
         return (
@@ -21,9 +29,9 @@ export default function AiringTodaySeries() {
                 poster_path: serie.poster_path,
                 title: serie.name,
                 release_date: serie.first_air_date
-            })) || []}
+            }))}
             loading={loading}
-            sectionTitle='Airing Today'
+            sectionTitle={sectionTitle}
             isFilm={false}
         />
     )
