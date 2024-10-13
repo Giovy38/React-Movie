@@ -16,7 +16,7 @@ type SeriesResponse = {
     vote_count: number;
 }
 
-type SeriesType = 'airing_today' | 'on_the_air' | 'popular' | 'top_rated';
+export type SeriesType = 'airing_today' | 'on_the_air' | 'popular' | 'top_rated';
 
 const buildSeriesUrl = (type: SeriesType): string => {
     const baseUrl = 'https://api.themoviedb.org/3/tv/';

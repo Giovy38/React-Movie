@@ -1,10 +1,9 @@
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
-import useSeriesFetch from "../../lib/hooks/useSeriesFetch"
+import useSeriesFetch, { SeriesType } from "../../lib/hooks/useSeriesFetch"
 import ShowList from "../ShowList"
 
 
 
-type SeriesType = 'popular' | 'airing_today' | 'top_rated' | 'on_the_air';
 
 type SeriesDataProps = {
     type: SeriesType;
@@ -30,7 +29,7 @@ export default function SeriesData({ type, sectionTitle }: SeriesDataProps) {
                 poster_path: serie.poster_path,
                 title: serie.name,
                 release_date: serie.first_air_date
-            })) || []}
+            }))}
             loading={loading}
             sectionTitle={sectionTitle}
             isFilm={false}

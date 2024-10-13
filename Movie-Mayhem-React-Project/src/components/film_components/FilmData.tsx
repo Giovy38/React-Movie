@@ -1,8 +1,7 @@
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import useFilmFetch from "../../lib/hooks/useFilmFetch";
+import useFilmFetch, { FilmType } from "../../lib/hooks/useFilmFetch";
 import ShowList from "../ShowList";
 
-type FilmType = 'popular' | 'now_playing' | 'top_rated' | 'upcoming';
 
 type FilmDataProps = {
     type: FilmType;
@@ -27,7 +26,7 @@ export default function FilmData({ type, sectionTitle }: FilmDataProps) {
                 poster_path: film.poster_path,
                 title: film.title,
                 release_date: film.release_date
-            })) || []}
+            }))}
             loading={loading}
             sectionTitle={sectionTitle}
             isFilm={true}
