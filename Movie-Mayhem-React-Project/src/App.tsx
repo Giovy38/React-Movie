@@ -4,7 +4,6 @@ import { NotificationProvider } from './provider/NotificationContext';
 import Navbar from './components/Navbar';
 import SearchBar from './components/SearchBar';
 import Particles from '../components/ui/particles'
-import Footer from './components/Footer';
 import FilmSearchResult from './components/film_components/FilmSearchResult';
 import LikedFilmsList from './components/LikedShows';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -103,7 +102,6 @@ function App() {
 
               {/* Footer Part */}
               <Particles className='w-full' quantity={500} />
-              <Footer />
             </Router>
           </SearchProvider>
         </NotificationProvider>
